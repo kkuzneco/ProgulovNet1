@@ -15,12 +15,13 @@ import java.util.Calendar;
 
 public class LessonAdd extends AppCompatActivity {
     Calendar dateAndTime=Calendar.getInstance();
-    Button setdateTime;
+    Button setdateTime, setSubject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson_add);
         setdateTime=(Button)findViewById(R.id.setDate);
+        setSubject=(Button)findViewById(R.id.setSubject);
         setInitialDateTime();
     }
     // отображаем диалоговое окно для выбора даты

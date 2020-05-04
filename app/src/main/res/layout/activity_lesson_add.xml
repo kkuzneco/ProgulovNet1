@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/setDate"
-            android:layout_width="379dp"
+            android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
@@ -23,18 +23,25 @@
             android:layout_marginRight="20dp"
             android:background="@android:color/background_light"
             android:drawableLeft="@android:drawable/ic_menu_month"
-            android:duplicateParentState="false"
-            android:fontFamily="sans-serif-medium"
-            android:freezesText="false"
             android:gravity="fill"
             android:onClick="setDate"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="10dp"
-            android:text="12345689"
-            android:textAlignment="center"
-            android:textColor="#B4090808"
+            android:paddingLeft="15dp"
+            android:text="Дата"
+
             android:textIsSelectable="false" />
+
+        <Button
+            android:id="@+id/setSubject"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_below="@id/setDate"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/background_light"
+            android:drawableLeft="?attr/actionModePasteDrawable"
+            android:paddingLeft="15dp"
+            android:text="Выбрать предмет" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
