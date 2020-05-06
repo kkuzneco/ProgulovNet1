@@ -1,7 +1,7 @@
 package com.progulov.progulovnet;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
@@ -10,7 +10,6 @@ import android.app.TimePickerDialog;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.os.Bundle;
-import android.view.View;
 import java.util.Calendar;
 
 public class LessonAdd extends AppCompatActivity {
@@ -23,6 +22,10 @@ public class LessonAdd extends AppCompatActivity {
         setdateTime=(Button)findViewById(R.id.setDate);
         setSubject=(Button)findViewById(R.id.setSubject);
         setInitialDateTime();
+    }
+    public void ShowSubjectChoice(View v){
+        Intent intent = new Intent(LessonAdd.this,Subject.class);
+        startActivity(intent);
     }
     // отображаем диалоговое окно для выбора даты
     public void setDate(View v) {

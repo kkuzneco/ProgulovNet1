@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ProgulovNet</string>
+    <string-array name="Subjects">
+        <item>subject 1</item>
+        <item>subject 2</item>
+        <item>subject 3</item>
+        <item>subject 4</item>
+        <item>subject 5</item>
+    </string-array>
 </resources>

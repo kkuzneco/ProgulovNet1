@@ -6,4 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".Subject">
 
+    <RelativeLayout
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints">
+
+        <ListView
+            android:id="@+id/subjectList"
+            android:layout_width="match_parent"
+            android:layout_height="125dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listOfSubjects"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,11 +23,11 @@
             android:layout_marginRight="20dp"
             android:background="@android:color/background_light"
             android:drawableLeft="@android:drawable/ic_menu_month"
-            android:gravity="fill"
             android:onClick="setDate"
             android:paddingLeft="15dp"
             android:text="Дата"
 
+            android:textAlignment="center"
             android:textIsSelectable="false" />
 
         <Button
@@ -40,6 +40,7 @@
             android:layout_marginRight="20dp"
             android:background="@android:color/background_light"
             android:drawableLeft="?attr/actionModePasteDrawable"
+            android:onClick="ShowSubjectChoice"
             android:paddingLeft="15dp"
             android:text="Выбрать предмет" />
     </RelativeLayout>
