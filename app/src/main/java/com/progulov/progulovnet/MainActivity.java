@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         // В другом случае выдаем сообщение с ошибкой:
         else {
-            Toast.makeText(getApplicationContext(), "Неправильные данные!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Неверные логин и/или пароль!",Toast.LENGTH_SHORT).show();
         }
     }
 }

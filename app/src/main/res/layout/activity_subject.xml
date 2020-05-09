@@ -6,21 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".Subject">
 
-    <RelativeLayout
-        android:layout_width="409dp"
-        android:layout_height="601dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#00897B"
+        android:text="СОХРАНИТЬ"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="6dp" />
 
-        <ListView
-            android:id="@+id/subjectList"
+    <RelativeLayout
+        android:id="@+id/ld"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <SearchView
+            android:id="@+id/subjectSearch"
             android:layout_width="match_parent"
-            android:layout_height="125dp" />
+            android:layout_height="wrap_content" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listOfSubjects"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjectSearch"
+            android:layout_alignParentBottom="false"
+            android:layout_marginTop="-4dp"
+            android:clipToPadding="false"
+            android:paddingBottom="50dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
