@@ -10,7 +10,6 @@
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?android:attr/activatedBackgroundIndicator"
         android:paddingBottom="10dp"
         android:scrollbarDefaultDelayBeforeFade="400"
         tools:ignore="MissingConstraints">

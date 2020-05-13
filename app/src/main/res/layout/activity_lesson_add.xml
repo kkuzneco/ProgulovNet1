@@ -49,6 +49,7 @@
             android:id="@+id/setLecturer"
             android:layout_width="match_parent"
             android:layout_height="59dp"
+            android:onClick="ShowLecturerChoice"
             android:layout_below="@id/setSubject"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
@@ -58,6 +59,20 @@
             android:drawableLeft="@android:drawable/ic_menu_my_calendar"
             android:paddingLeft="12dp"
             android:text="Выбрать преподавателя" />
+
+        <Button
+            android:id="@+id/setAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_below="@id/setLecturer"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="?android:attr/colorBackgroundCacheHint"
+            android:onClick="ShowStudents"
+
+            android:text="ОТМЕТИТЬ СТУДЕНТОВ" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

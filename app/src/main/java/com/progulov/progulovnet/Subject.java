@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import android.util.Log;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -22,9 +23,11 @@ import java.util.List;
 import com.progulov.progulovnet.adapter.SubjectAdapter;
 public class Subject extends AppCompatActivity {
 
+
     private int index = 0;
-   // SubjectModel[] subjectList = new SubjectModel[10];
-   // DBHelper dbHelper;
+   public SubjectModel[] subjectList = new SubjectModel[20];
+    Collection<SubjectModel> collection =new ArrayList<>();
+    DBHelper dbHelper;
     private RecyclerView listOfSubject;
     SubjectAdapter subAdapter;
 
@@ -37,10 +40,11 @@ public class Subject extends AppCompatActivity {
     //    LinearLayoutManager llm = new LinearLayoutManager(this);
      //   listOfSubject.setLayoutManager(llm);
 
-        loadSubjects();
 
 
-      /*  dbHelper=new DBHelper(this,"",1);
+
+ /*     dbHelper=new DBHelper(this,"",1);
+
        SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         Cursor cursor = database.query(DBHelper.TABLE_SUBJECTS,null,null,null,null,null,null);
@@ -49,7 +53,9 @@ public class Subject extends AppCompatActivity {
             int nameIndex=cursor.getColumnIndex(DBHelper.KEY_NAME);
             do{
                 Log.d("mLog", "ID= "+ cursor.getInt(idIndex)+", name - "+cursor.getString(nameIndex));
-              //  arrayofSubjects[index]=cursor.getString(nameIndex);
+                subjectList[index]=new SubjectModel("default","ИМО");
+                subjectList[index].name=cursor.getString(nameIndex);
+                Log.d("mLog", "subLIST= "+   subjectList[index].name );
                 index++;
             }
             while (cursor.moveToNext());
@@ -59,10 +65,9 @@ public class Subject extends AppCompatActivity {
             Log.d("mLog","0 rows");
         cursor.close();
         dbHelper.close();
+*/
+        loadSubjects();
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ListOfSubjects);
-        subjectList.setAdapter(adapter);*/
     }
    private void initRecyclerView(){
         listOfSubject = findViewById(R.id.listOfSubjects);//привязка из лэйаут
@@ -74,10 +79,13 @@ public class Subject extends AppCompatActivity {
         Collection<SubjectModel> subjects = getSubject();
         subAdapter.setItems(subjects);
     }
-    private Collection<SubjectModel> getSubject() {
+   public Collection<SubjectModel> getSubject() {
+  //      Collections.addAll(collection, subjectList);
+   //     Log.d("mLog", "11111 "+  subjectList[0].name+ subjectList[0].department);
 
-        return Arrays.asList(
-                new SubjectModel("История", "ОИ"),
+       //     Log.d("mLog", "11111 "+  subjectList[1].name+ subjectList[1].department);
+     return Arrays.asList(
+           new SubjectModel("История", "ОИ"),
         new SubjectModel("Технологии производства ПО", "ИМО"),
         new SubjectModel("Web-технологии 2", "ИМО"),
         new SubjectModel("Право", "право"),
