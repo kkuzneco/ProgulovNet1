@@ -64,7 +64,6 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
 
         public void bind(LecturerModel lecturer) {
             Name.setText(lecturer.name);
-            department.setText(lecturer.department);
 
         }
 
@@ -76,7 +75,7 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             Name = (TextView) itemView.findViewById(R.id.subject_name);
-            department = (TextView) itemView.findViewById(R.id.subject_depatrment);
+
 
 
         }

@@ -1,4 +1,5 @@
 package com.progulov.progulovnet.adapter;
+import android.graphics.Color;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.LayoutInflater;
@@ -37,9 +38,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         return new SubjectViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(SubjectViewHolder holder, int position) {
-
+        final CardView cardView = holder.cv;
+       // holder.Name.setText(listOfSubjects.get(position));
+        cardView.setTag(listOfSubjects.get(position));
        // holder.cv.setSelected(selectedItems.get(position, false));
         holder.bind(listOfSubjects.get(position));
     }
@@ -53,7 +57,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
 
     // Предоставляет прямую ссылку на каждый View-компонент
     // Используется для кэширования View-компонентов и последующего быстрого доступа к ним
-    class SubjectViewHolder extends RecyclerView.ViewHolder {
+    class SubjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Ваш ViewHolder должен содержать переменные для всех
         // View-компонентов, которым вы хотите задавать какие-либо свойства
         // в процессе работы пользователя со списком
@@ -76,9 +80,22 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             Name = (TextView) itemView.findViewById(R.id.subject_name);
-            department = (TextView) itemView.findViewById(R.id.subject_depatrment);
 
+            cv.setOnClickListener(this);
 
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(cv.isSelected()){
+               // Log.d("selectItem", "remove selection");
+                cv.setCardBackgroundColor(Color.WHITE);
+                cv.setSelected(false);
+            }else{
+               // Log.d("selectItem", "set selection");
+                cv.setCardBackgroundColor(Color.LTGRAY);
+                cv.setSelected(true);
+            }
         }
     }
 

@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00897B"
+
+        android:onClick="save"
         android:text="СОХРАНИТЬ"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,9 +36,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lecturerRecycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_below="@id/searchLecturer"
-            android:paddingBottom="50dp"
-            />
+            android:paddingBottom="50dp" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ListView
+            android:id="@+id/lecturerListVew"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/searchLecturer" />
     </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

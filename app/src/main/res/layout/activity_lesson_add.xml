@@ -7,6 +7,7 @@
     tools:context=".LessonAdd">
 
     <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
@@ -14,7 +15,7 @@
         tools:layout_editor_absoluteY="-6dp">
 
         <Button
-            android:id="@+id/setDate"
+            android:id="@+id/dateEdit"
             android:layout_width="match_parent"
             android:layout_height="59dp"
             android:layout_alignParentTop="true"
@@ -34,7 +35,7 @@
             android:id="@+id/setSubject"
             android:layout_width="match_parent"
             android:layout_height="59dp"
-            android:layout_below="@id/setDate"
+            android:layout_below="@id/dateEdit"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
@@ -49,7 +50,6 @@
             android:id="@+id/setLecturer"
             android:layout_width="match_parent"
             android:layout_height="59dp"
-            android:onClick="ShowLecturerChoice"
             android:layout_below="@id/setSubject"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
@@ -57,8 +57,9 @@
             android:layout_marginBottom="20dp"
             android:background="@android:color/background_light"
             android:drawableLeft="@android:drawable/ic_menu_my_calendar"
+            android:onClick="ShowLecturerChoice"
             android:paddingLeft="12dp"
-            android:text="Выбрать преподавателя" />
+            android:text="ВЫБРАТЬ ПРЕПОДАВАТЕЛЯ" />
 
         <Button
             android:id="@+id/setAttendance"
@@ -66,13 +67,63 @@
             android:layout_height="59dp"
             android:layout_below="@id/setLecturer"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:background="?android:attr/colorBackgroundCacheHint"
+            android:background="@android:color/background_light"
             android:onClick="ShowStudents"
-
             android:text="ОТМЕТИТЬ СТУДЕНТОВ" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:layout_below="@id/setAttendance"
+            android:layout_alignParentBottom="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:background="@color/colorPrimary"
+            android:onClick="save"
+            android:text="СОХРАНИТЬ"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/exit"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/save"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="false"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="29dp"
+            android:background="#00F9F9F9"
+            android:onClick="exitApp"
+            android:text="ВЫЙТИ ИЗ УЧЕТНОЙ ЗАПИСИ"
+            android:textAlignment="center"
+            android:textColor="#A86D6868"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/save"
+            android:text="" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

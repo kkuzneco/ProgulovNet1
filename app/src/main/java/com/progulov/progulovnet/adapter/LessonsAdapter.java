@@ -2,7 +2,6 @@ package com.progulov.progulovnet.adapter;
 
 import android.graphics.Color;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,58 +10,52 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.progulov.progulovnet.StudentModel;
-import com.progulov.progulovnet.LecturerModel;
+
 import com.progulov.progulovnet.R;
+
+import com.progulov.progulovnet.data.LessonModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import static com.progulov.progulovnet.R.layout.cardview;
-
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
-
-   public boolean[] selects = {false, false, false,false,false,false,false,false,false,false,false,false, false};
+import static com.progulov.progulovnet.R.layout.lessoncardview;
+public class LessonsAdapter extends RecyclerView.Adapter<LessonsAdapter.LessonsViewHolder>  {
     public int setItems[] = new int[13];
-    private List<StudentModel> listOfStudents = new ArrayList<>();
+    private List<LessonModel> listOfLessons = new ArrayList<>();
     int pos = 0;
-    public void setItems(Collection<StudentModel> students) {
-        listOfStudents.addAll(students);
+    public void setItems(Collection<LessonModel> lessons) {
+        listOfLessons.addAll(lessons);
         //   notifyDataSetChanged();
     }
 
     public void clearItems() {
-        listOfStudents.clear();
+        listOfLessons.clear();
         //  notifyDataSetChanged();
     }
 
     @Override
-    public StudentAdapter.StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public LessonsAdapter.LessonsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(cardview, parent, false);
-        return new StudentAdapter.StudentViewHolder(view);
+                .inflate(R.layout.lessoncardview, parent, false);
+        return new LessonsAdapter.LessonsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(StudentAdapter.StudentViewHolder holder, int position) {
-
-
-        // holder.cv.setSelected(selectedItems.get(position, false));
-        holder.bind(listOfStudents.get(position));
-
+    public void onBindViewHolder(@NonNull LessonsViewHolder holder, int position) {
+        holder.bind(listOfLessons.get(position));
     }
+
 
     @Override
     public int getItemCount() {
-        return listOfStudents.size();
+        return listOfLessons.size();
     }
 
 
 
     // Предоставляет прямую ссылку на каждый View-компонент
     // Используется для кэширования View-компонентов и последующего быстрого доступа к ним
-    class StudentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class LessonsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // Ваш ViewHolder должен содержать переменные для всех
         // View-компонентов, которым вы хотите задавать какие-либо свойства
         // в процессе работы пользователя со списком
@@ -80,7 +73,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         // Мы также создали конструктор, который принимает на вход View-компонент строкИ
         // и ищет все дочерние компоненты
 
-        public StudentViewHolder(@NonNull View itemView) {
+        public LessonsViewHolder(@NonNull View itemView) {
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             Name = (TextView) itemView.findViewById(R.id.subject_name);
@@ -91,20 +84,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
         @Override
         public void onClick(View view) {
-            int positionIndex = getAdapterPosition();
-           if(selects[positionIndex] )
-            selects[positionIndex] = false ;
-           else selects[positionIndex]=true;
-            Log.d("selectItem", String.valueOf(selects[positionIndex]));
-            if(cv.isSelected()){
-                // Log.d("selectItem", "remove selection");
-                cv.setCardBackgroundColor(Color.WHITE);
-                cv.setSelected(false);
-            }else{
-
-                cv.setCardBackgroundColor(Color.parseColor("#cef2cb"));
-                cv.setSelected(true);
-            }
         }
 
     }

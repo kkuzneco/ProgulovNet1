@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Students">
+
     <Button
         android:id="@+id/setAttendance"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00897B"
+        android:onClick="save"
         android:text="СОХРАНИТЬ"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="6dp" />
+        tools:layout_editor_absoluteX="0dp" />
 
     <RelativeLayout
         android:layout_width="wrap_content"

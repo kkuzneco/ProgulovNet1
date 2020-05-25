@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00897B"
+        android:onClick="Save"
         android:text="СОХРАНИТЬ"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,6 +25,12 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <ListView
+            android:id="@+id/subjectListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjectSearch" />
+
         <SearchView
             android:id="@+id/subjectSearch"
             android:layout_width="match_parent"
@@ -31,12 +38,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listOfSubjects"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_below="@id/subjectSearch"
             android:layout_alignParentBottom="false"
             android:layout_marginTop="-4dp"
             android:clipToPadding="false"
+
             android:paddingBottom="50dp">
 
         </androidx.recyclerview.widget.RecyclerView>
