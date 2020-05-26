@@ -7,29 +7,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.progulov.progulovnet.LecturerModel;
+import com.progulov.progulovnet.LessonModel;
 import com.progulov.progulovnet.R;
+
 import java.util.List;
 
-public class ListViewAdapter extends BaseAdapter {
-
+public class ListViewAdapterForLessons extends BaseAdapter {
     Activity activity;
-    List<LecturerModel> listLecturers;
+    List<LessonModel> listLessons;
     LayoutInflater inflater;
 
-    public ListViewAdapter(Activity activity, List<LecturerModel> listLecturers) {
+    public ListViewAdapterForLessons(Activity activity, List<LessonModel> listLessons) {
         this.activity = activity;
-        this.listLecturers= listLecturers;
+        this.listLessons= listLessons;
     }
 
     @Override
     public int getCount() {
-        return listLecturers.size();
+        return listLessons.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return listLecturers.get(i);
+        return listLessons.get(i);
     }
 
     @Override
@@ -46,8 +46,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         View itemView = inflater.inflate(R.layout.cardview, null);
         TextView txtName= (TextView) itemView.findViewById(R.id.subject_name);
-        txtName.setText(listLecturers.get(i).getName());
-
+        TextView lecturer = (TextView) itemView.findViewById(R.id.lecturer_name) ;
+        txtName.setText(listLessons.get(i).subject_name);
+        lecturer.setText(listLessons.get(i).lecturer_name);
         return  itemView;
     }
 }

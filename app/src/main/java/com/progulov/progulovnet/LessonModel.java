@@ -1,23 +1,22 @@
-package com.progulov.progulovnet.data;
+package com.progulov.progulovnet;
 
 public class LessonModel {
+
     public String subject_name;
     public String lecturer_name;
-    public String dateTime;
-
+    public String date;
+    public String time;
     // public String department;
     public String id;
 
-
-    public LessonModel(String id, String subject, String lecturer, String dateTime) {
+    public LessonModel(String id, String subject, String lecturer, String date, String time) {
         this.id = id;
         this.subject_name = subject;
         this.lecturer_name = lecturer;
-        this.dateTime = dateTime;
-
-
-
+        this.date= date;
+        this.time = time;
     }
+
     public String getid() {
         return id;
     }
@@ -25,6 +24,5 @@ public class LessonModel {
     public void setid(String id) {
         this.id = id;
     }
-
 
 }

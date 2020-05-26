@@ -1,46 +1,31 @@
 package com.progulov.progulovnet;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.progulov.progulovnet.data.AppContract.AllSubjects;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
 import android.content.Intent;
 import android.util.Log;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import java.util.ArrayList;
-import java.util.List;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.view.View;
-
-import java.util.ArrayList;
-import java.util.List;
-import com.progulov.progulovnet.adapter.SubjectAdapter;
 import com.progulov.progulovnet.data.AppContract;
-import com.progulov.progulovnet.MainActivity;
+
 public class Subject extends AppCompatActivity {
     ListView subjectListView;
     String subjectList[] = new String[9];
      int position = 0;
      int index = 0;
-  // SubjectModel[] subjectList = new SubjectModel[9];
+   // SubjectModel[] subjectList = new SubjectModel[9];
     //Collection<SubjectModel> collection =new ArrayList<>();
     DBHelper dbHelper = new DBHelper(this);
     // RecyclerView listOfSubject;
     //SubjectAdapter subAdapter;
     Button saveAttendance ;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +41,8 @@ public class Subject extends AppCompatActivity {
                 AppContract.AllSubjects.COLUMN_NAME,
                 AppContract.AllSubjects.COLUMN_DEPARTMENT
         };
-     Cursor cursor = db.query(AppContract.AllSubjects.TABLE_NAME, projection, null,null,null,null,null);
+
+          Cursor cursor = db.query(AppContract.AllSubjects.TABLE_NAME, projection, null,null,null,null,null);
      int idColumnIndex=cursor.getColumnIndex(AllSubjects._ID);
     int nameColumnIndex=cursor.getColumnIndex(AllSubjects.COLUMN_NAME);
     int departmentColumnIndex=cursor.getColumnIndex(AllSubjects.COLUMN_DEPARTMENT);
@@ -70,7 +56,6 @@ public class Subject extends AppCompatActivity {
         //subjectList[index].department =currentDepartment;
         //Log.d("mLog", "ID= "+ index+", name - "+subjectList[index].name);
         index++;
-
     }
         cursor.close();
         dbHelper.close();
@@ -87,17 +72,16 @@ public class Subject extends AppCompatActivity {
             }
         });
     //    loadSubjects();
-
     }
+
     public void Save(View v){
         Intent intent = new Intent(Subject.this, LessonAdd.class);
-
         String subjectName = subjectList[position];
         intent.putExtra("name", subjectName);
         setResult(RESULT_OK,intent);
         finish();
-
     }
+
   /* private void initRecyclerView(){
         listOfSubject = findViewById(R.id.listOfSubjects);//привязка из лэйаут
         listOfSubject.setLayoutManager(new LinearLayoutManager(this));//менеджер

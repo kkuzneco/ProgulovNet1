@@ -5,13 +5,11 @@ public class LecturerModel {
    // public String department;
     public int id;
 
-
     LecturerModel(int id, String name) {
         this.id = id;
         this.name = name;
-        ;
-
     }
+
     public int getid() {
         return id;
     }
@@ -27,7 +25,4 @@ public class LecturerModel {
     public void setName(String name) {
         this.name = name;
     }
-
-
-
 }

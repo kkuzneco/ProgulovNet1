@@ -1,24 +1,20 @@
 package com.progulov.progulovnet;
+
 import com.progulov.progulovnet.data.AppContract;
 import com.progulov.progulovnet.data.AppContract.AllSubjects;
 import com.progulov.progulovnet.data.AppContract.AllLecturers;
+import com.progulov.progulovnet.data.AppContract.AllLessons;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
-import java.util.SortedMap;
-
 public class DBHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION=10;
+    public static final int DATABASE_VERSION=19;
     public static final String LOG_TAG = DBHelper.class.getSimpleName();
     public static final String DATABASE_NAME="attendance.db";
-
     public static final String TABLE_SUBJECTS="subjectsDb";
     public static final String TABLE_LECTURERS="lecturersDb";
-
     public static final String KEY_ID="_id";
     public static final String KEY_NAME="name";
   //  public static final String KEY_DEPARTMENT="depatrment";
@@ -35,8 +31,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_LECTURERS_TABLE);
         String SQL_CREATE_STUDENTS_TABLE = "CREATE TABLE "+ AppContract.AllStudents.TABLE_NAME+"("+ AppContract.AllStudents._ID+" INTEGER PRIMARY KEY AUTOINCREMENT, " + AppContract.AllStudents.COLUMN_NAME+" TEXT NOT NULL );";
         db.execSQL(SQL_CREATE_STUDENTS_TABLE);
+        String SQL_CREATE_LESSONS_TABLE = "CREATE TABLE "+ AllLessons.TABLE_NAME+"("+ AllLessons._ID+" TEXT PRIMARY KEY, " + AllLessons.COLUMN_DATE+" TEXT NOT NULL, " + AllLessons.COLUMN_TIME + " TEXT, " + AllLessons.COLUMN_LECTURER + " TEXT, " + AllLessons.COLUMN_SUBJECT + " TEXT NOT NULL);";
+        db.execSQL(SQL_CREATE_LESSONS_TABLE);
         ContentValues values1 = new ContentValues();
         ContentValues values = new ContentValues();
+        ContentValues values3 = new ContentValues();
+        values3.put(AppContract.AllLessons._ID, "id");
+        values3.put(AppContract.AllLessons.COLUMN_DATE, "date");
+        values3.put(AppContract.AllLessons.COLUMN_TIME, "time");
+        values3.put(AppContract.AllLessons.COLUMN_LECTURER, "lecturer");
+        values3.put(AppContract.AllLessons.COLUMN_SUBJECT, "subj");
+        db.insert(AppContract.AllLessons.TABLE_NAME,null,values3);
+
         values1.put(AllSubjects.COLUMN_NAME, "Технологии производства ПО");
         values1.put(AllSubjects.COLUMN_DEPARTMENT, "ИМО");
         db.insert(AllSubjects.TABLE_NAME,null,values1);
@@ -65,7 +71,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values1.put(AllSubjects.COLUMN_DEPARTMENT, "ИМО");
         db.insert(AllSubjects.TABLE_NAME,null,values1);
 
-
         values1.put(AllLecturers.COLUMN_NAME, "Кулаков Кирилл Александрович");
         values1.put(AllLecturers.COLUMN_DEPARTMENT, "ИМО");
         db.insert(AllLecturers.TABLE_NAME,null,values1);
@@ -87,7 +92,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values1.put(AllLecturers.COLUMN_NAME, "Димитров Вячеслав Михайлович");
         values1.put(AllLecturers.COLUMN_DEPARTMENT, "ИМО");
         db.insert(AllLecturers.TABLE_NAME,null,values1);
-
 
         values.put(AppContract.AllStudents.COLUMN_NAME, "Аверков Всеволод");
         db.insert(AppContract.AllStudents.TABLE_NAME,null,values);
@@ -115,8 +119,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert(AppContract.AllStudents.TABLE_NAME,null,values);
         values.put(AppContract.AllStudents.COLUMN_NAME, "Харковчук Артур");
         db.insert(AppContract.AllStudents.TABLE_NAME,null,values);
-
-
     }
 
     @Override
@@ -124,6 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
     db.execSQL("drop table if exists "+ AllSubjects.TABLE_NAME);
     db.execSQL("drop table if exists "+ AllLecturers.TABLE_NAME);
         db.execSQL("drop table if exists "+ AppContract.AllStudents.TABLE_NAME);
+        db.execSQL("drop table if exists "+ AllLessons.TABLE_NAME);
     onCreate(db);
     }
 }

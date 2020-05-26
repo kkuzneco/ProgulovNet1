@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#00897B"
-
         android:onClick="save"
         android:text="СОХРАНИТЬ"
         android:textColor="#FFFFFF"
@@ -30,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true">
-
         </SearchView>
 
         <androidx.recyclerview.widget.RecyclerView

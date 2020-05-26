@@ -1,55 +1,29 @@
 package com.progulov.progulovnet;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.view.View.OnScrollChangeListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.progulov.progulovnet.adapter.ListViewAdapter;
-import com.progulov.progulovnet.adapter.SubjectAdapter;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-
-import com.progulov.progulovnet.adapter.LecturerAdapter;
 import com.progulov.progulovnet.data.AppContract;
-
 
 public class Lecturer extends AppCompatActivity  {
     Button setLecturer;
-
- //private RecyclerView listOfLecturers;
+ // private RecyclerView listOfLecturers;
    ListView lecturerListView;
-int position = -1;
- //   LecturerAdapter lecAdapter;
+    int position = -1;
+ // LecturerAdapter lecAdapter;
  //private static final LecturerModel[] lecturerList = new LecturerModel[7];
     public String[] lecturerList = new String[7];
     DBHelper dbHelper = new DBHelper(this);
@@ -57,6 +31,7 @@ int position = -1;
   //  FirebaseDatabase mFirebaseDatabase;
    // DatabaseReference mDatabaseReference;
     private List<LecturerModel> list_lecturer = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +40,6 @@ int position = -1;
         setLecturer = (Button) findViewById(R.id.chooseLecturer);
       //  initFirebase();
       //  addEventFirebaseListener();
-
         lecturerListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String[] projection = {
@@ -84,13 +58,10 @@ int position = -1;
             Log.d("mLog", "ID= " + cursor.getInt(idColumnIndex) + ", name - " + cursor.getString(nameColumnIndex));
             lecturerList[index] = new String();
             lecturerList[index] = currentName;
-
             // lecturerList[index].department =currentDepartment;
             //Log.d("mLog", "ID= "+ index+", name - "+lecturerList[index].name);
             index++;
-
         }
-
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_checked, lecturerList);
         lecturerListView.setAdapter(adapter);
@@ -116,8 +87,6 @@ int position = -1;
 
             }
         });
-
-
     }
    /* private void addEventFirebaseListener() {
         //показываем View загрузки
@@ -151,6 +120,7 @@ int position = -1;
                     }
                 });
     }*/
+
     private void initFirebase() {
         //инициализируем наше приложение для Firebase согласно параметрам в google-services.json
         // (google-services.json - файл, с настройками для firebase, кот. мы получили во время регистрации)
@@ -161,16 +131,11 @@ int position = -1;
       //  mDatabaseReference = mFirebaseDatabase.getReference();
     }
 
-
     public void save(View v){
         Intent intent = new Intent(Lecturer.this, LessonAdd.class);
-
         String lecturerName = lecturerList[position];
         intent.putExtra("name", lecturerName);
         setResult(RESULT_OK,intent);
         finish();
-
     }
-
-
-    }
+}

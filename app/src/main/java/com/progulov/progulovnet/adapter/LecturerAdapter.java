@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.TextView;
-
-import com.progulov.progulovnet.Lecturer;
 import com.progulov.progulovnet.R;
 import com.progulov.progulovnet.LecturerModel;
 import java.util.List;
@@ -39,7 +37,6 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
 
     @Override
     public void onBindViewHolder(LecturerViewHolder holder, int position) {
-
         // holder.cv.setSelected(selectedItems.get(position, false));
         holder.bind(listOfLecturers.get(position));
     }
@@ -48,8 +45,6 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
     public int getItemCount() {
         return listOfLecturers.size();
     }
-
-
 
     // Предоставляет прямую ссылку на каждый View-компонент
     // Используется для кэширования View-компонентов и последующего быстрого доступа к ним
@@ -61,12 +56,10 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
         TextView Name;
         TextView department;
 
-
         public void bind(LecturerModel lecturer) {
             Name.setText(lecturer.name);
 
         }
-
 
         // Мы также создали конструктор, который принимает на вход View-компонент строкИ
         // и ищет все дочерние компоненты
@@ -75,10 +68,6 @@ public class LecturerAdapter extends RecyclerView.Adapter<LecturerAdapter.Lectur
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             Name = (TextView) itemView.findViewById(R.id.subject_name);
-
-
-
         }
     }
-
 }

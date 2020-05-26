@@ -2,8 +2,8 @@ package com.progulov.progulovnet;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,7 +24,6 @@ import java.util.UUID;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
@@ -33,25 +32,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.progulov.progulovnet.data.AppContract;
-import com.progulov.progulovnet.data.LessonModel;
 
 public class LessonAdd extends AppCompatActivity implements
         View.OnClickListener{
     Calendar dateAndTime=Calendar.getInstance();
+    SQLiteDatabase db;
     AlertDialog.Builder builder;
     Button setdateTime, setSubject, setLecturer, setStudents, exitAppBut, save;
     int index = 0, index1 = 0;
     boolean[] arrayStud = new boolean[13];
     TextView tv;
+    String date;
+    String time;
    // boolean[] selects = new boolean[13];
     ProgressBar pb;
     private List<LessonModel> list_lessons = new ArrayList<>();
     FirebaseDatabase mFirebaseDatabase;
     DatabaseReference mDatabaseReference;
-
+    DatabaseReference resultRef;
     public StudentModel[] studentList = new StudentModel[13];
     DBHelper dbHelper = new DBHelper(this);
  //   MainActivity mainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,7 @@ public class LessonAdd extends AppCompatActivity implements
         tv=(TextView) findViewById(R.id.tv);
         pb = (ProgressBar)findViewById(R.id.progressBar2);
         save = (Button)findViewById(R.id.save) ;
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+       db = dbHelper.getWritableDatabase();
         arrayStudReset();
 
         String[] projection = {
@@ -84,34 +86,35 @@ public class LessonAdd extends AppCompatActivity implements
             studentList[index]=new StudentModel("default");
             studentList[index].name = currentName;
             index++;
-
         }
         cursor.close();
-        dbHelper.close();
 
         setInitialDateTime();
         initFirebase();
         addEventFirebaseListener();
-
     }
+
     public void ShowSubjectChoice(View v){
         Intent intent = new Intent(LessonAdd.this,Subject.class);
         startActivityForResult(intent,1);
     }
-    public void exitApp(View v){
 
+    public void exitApp(View v){
         setResult(RESULT_OK);
         finish();
     }
+
     public void ShowLecturerChoice(View v){
         Intent intent = new Intent(LessonAdd.this,Lecturer.class);
         startActivityForResult(intent,2);
     }
+
     public void ShowStudents(View v){
         Intent intent = new Intent(LessonAdd.this,Students.class);
         intent.putExtra("selects",arrayStud);
         startActivityForResult(intent, 3);
     }
+
     // отображаем диалоговое окно для выбора даты
     public void setDate(View v) {
         new DatePickerDialog(LessonAdd.this, d,
@@ -128,9 +131,11 @@ public class LessonAdd extends AppCompatActivity implements
                 dateAndTime.get(Calendar.MINUTE), true)
                 .show();
     }
+
     // установка начальных даты и времени
     private void setInitialDateTime() {
-
+        date = DateUtils.formatDateTime(this,  dateAndTime.getTimeInMillis(),DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+        time = DateUtils.formatDateTime(this,  dateAndTime.getTimeInMillis(),DateUtils.FORMAT_SHOW_TIME);
         setdateTime.setText(DateUtils.formatDateTime(this,
                 dateAndTime.getTimeInMillis(),
                 DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR
@@ -176,17 +181,11 @@ public class LessonAdd extends AppCompatActivity implements
             setSubject.setText(a);
         }
         if(requestCode==3){
-
-
             arrayStud = data.getBooleanArrayExtra("selects");//здесь данные о посещаемости
-
         }
     }
 
     private void addEventFirebaseListener() {
-        //показываем View загрузки
-
-    //    lecturerListView.setVisibility(View.INVISIBLE);
         pb.setVisibility(View.VISIBLE);
         save.setVisibility(View.INVISIBLE);
         setdateTime.setVisibility(View.INVISIBLE);
@@ -229,6 +228,7 @@ public class LessonAdd extends AppCompatActivity implements
                     }
                 });
     }
+
     private void initFirebase() {
         //инициализируем наше приложение для Firebase согласно параметрам в google-services.json
         // (google-services.json - файл, с настройками для firebase, кот. мы получили во время регистрации)
@@ -237,7 +237,9 @@ public class LessonAdd extends AppCompatActivity implements
          mFirebaseDatabase = FirebaseDatabase.getInstance();
         //получаем ссылку для работы с базой данных
          mDatabaseReference = mFirebaseDatabase.getReference();
+         resultRef = mDatabaseReference.child("lessons");
     }
+
     public void save(View v){
          builder = new AlertDialog.Builder(this);
          builder.setMessage("Создать занятие?");
@@ -259,17 +261,27 @@ public class LessonAdd extends AppCompatActivity implements
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
         //dialog.setTitle("Добавить занятие?");
-
     }
+
     private void createLesson() {
         //создаем элемент класса User
-        LessonModel lesson = new LessonModel(UUID.randomUUID().toString(), setSubject.getText().toString(), setLecturer.getText().toString(), setdateTime.getText().toString());
+
+
+        LessonModel lesson = new LessonModel(UUID.randomUUID().toString(), setSubject.getText().toString(), setLecturer.getText().toString(), date,time);
         //сохраняем данные в базе данных Firebase по пути users -> UUID_User
         for(index = 0;index<13;index++) {
             AttendanceModel attendance = new AttendanceModel(UUID.randomUUID().toString(), lesson.getid(), studentList[index].name, arrayStud[index]);
             mDatabaseReference.child("attendance").child(attendance.getid()).setValue(attendance);
+
         }
         Task t =   mDatabaseReference.child("lessons").child(lesson.getid()).setValue(lesson);
+        ContentValues values = new ContentValues();
+        values.put(AppContract.AllLessons._ID, lesson.getid());
+        values.put(AppContract.AllLessons.COLUMN_DATE, lesson.date);
+        values.put(AppContract.AllLessons.COLUMN_TIME, lesson.time);
+        values.put(AppContract.AllLessons.COLUMN_LECTURER, lesson.lecturer_name);
+        values.put(AppContract.AllLessons.COLUMN_SUBJECT, lesson.subject_name);
+        db.insert(AppContract.AllLessons.TABLE_NAME,null,values);
         mDatabaseReference = FirebaseDatabase.getInstance().getReference("lessons/"+lesson.getid());
 
               if(mDatabaseReference!=null){
@@ -283,17 +295,25 @@ public class LessonAdd extends AppCompatActivity implements
                           Toast.LENGTH_SHORT).show();
               }
 
-
-        //очищаем поля ввода
-
+        onBackPressed();
     }
+
     void arrayStudReset(){
         for(index1=0;index1<13; index1++)
             arrayStud[index1]= false;
     }
+
     void clearEditText() {
         setInitialDateTime();
         setSubject.setText("Выберите предмет");
         setLecturer.setText("Выберите преподавателя");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(LessonAdd.this, ShowLessons.class);
+        setResult(RESULT_OK);
+        finish();
     }
 }

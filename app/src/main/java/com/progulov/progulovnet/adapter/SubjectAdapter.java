@@ -1,4 +1,5 @@
 package com.progulov.progulovnet.adapter;
+
 import android.graphics.Color;
 import android.view.ViewGroup;
 import android.view.View;
@@ -13,8 +14,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import 	android.util.SparseBooleanArray;
-
-
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectViewHolder> {
 
@@ -38,7 +37,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         return new SubjectViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(SubjectViewHolder holder, int position) {
         final CardView cardView = holder.cv;
@@ -53,8 +51,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         return listOfSubjects.size();
     }
 
-
-
     // Предоставляет прямую ссылку на каждый View-компонент
     // Используется для кэширования View-компонентов и последующего быстрого доступа к ним
     class SubjectViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -65,13 +61,10 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
         TextView Name;
         TextView department;
 
-
         public void bind(SubjectModel subject) {
             Name.setText(subject.name);
             department.setText(subject.department);
-
         }
-
 
         // Мы также создали конструктор, который принимает на вход View-компонент строкИ
         // и ищет все дочерние компоненты
@@ -80,9 +73,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
             super(itemView);
             cv = (CardView) itemView.findViewById(R.id.cv);
             Name = (TextView) itemView.findViewById(R.id.subject_name);
-
             cv.setOnClickListener(this);
-
         }
 
         @Override
@@ -98,6 +89,5 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.SubjectV
             }
         }
     }
-
 }
 

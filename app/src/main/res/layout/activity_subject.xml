@@ -44,7 +44,6 @@
             android:layout_alignParentBottom="false"
             android:layout_marginTop="-4dp"
             android:clipToPadding="false"
-
             android:paddingBottom="50dp">
 
         </androidx.recyclerview.widget.RecyclerView>
